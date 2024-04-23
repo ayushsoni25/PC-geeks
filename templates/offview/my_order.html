@@ -1,0 +1,30 @@
+{% extends 'offview/customer_base.html' %}
+{% load static %}
+
+{% block content %}
+<h3 class="alert alert-info" style="text-align:center; ">Thank You For Your Order  <strong>{{request.user}}</strong> !</h3> <br><br>
+<div class="container">
+    <h3 class=text-dark><header class="card-header" style="text-align:center;"> My Orders / Tracking </header></h3>
+
+    {% for products,order in data %}
+    <div class="col-md-4">
+  {% for myin in products %}
+    <div class="card">
+        <div class="card-body">
+
+  <img src="{% static myin.product_pic.url %}" class="img-fluid" height=200 width=200>
+  <p class="title"><strong>Name : </strong>{{myin.Name}} <br> <strong>Description : </strong>{{myin.description}}</p> <span class="text-muted"><strong>Price : </strong>{{myin.price}} </span>
+	<p> <strong>Shipment Address:</strong> <br> {{order.address}}</p>
+	<p> <strong>Status:</strong> <br> {{order.status}} </p>
+
+                  </div>
+
+
+  </div>
+                {%endfor%}
+
+</div>
+    {%endfor%}
+</div>
+<br><br><br><br><br>
+{% endblock content %}

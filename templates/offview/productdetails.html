@@ -1,0 +1,22 @@
+{% extends 'offview/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-4 mt-5">
+      <img class="card-img" src="{% static pd.product_pic.url %}">
+    </div>
+    <div class= "col-md-6 text-justify mt-5">
+      <h5 class= "text-dark text-justify"><p>{{pd.Name}}</p></h5>
+      <p>
+       {{pd.description}}
+      </p>
+      <p>Price : &#8377 {{pd.price}}</p>
+      <form>
+        <a class="btn btn-warning mb-5" href="{% url 'add-to-cart' pd.id  %}">Add to Cart</a>
+        <a class="btn btn-primary mb-5" href="/home">Continue Shopping</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'offview/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto  bg-dark mt-5 ">
+      <h2 class="text-center alert alert-info bg-warning text-dark mt-2">SignUp</h2>
+      <form method="POST" enctype=multipart/form-data>
+        {% csrf_token %}
+        <div class ="form-group">
+          {% render_field usereshop.first_name placeholder="First Name" class="form-control" %}
+        </div>
+        <div class ="form-group">
+          {% render_field usereshop.last_name placeholder="Last Name" class="form-control" %}
+        </div>
+        <div class ="form-group">
+          {% render_field usereshop.username placeholder="UserName" class="form-control" %}
+        </div>
+        <div class ="form-group">
+          {% render_field usereshop.password placeholder="Password" class="form-control" %}
+        </div>
+        <div class ="form-group">
+          {% render_field customereshop.address placeholder="Address" class="form-control" %}
+        </div>
+        <div class ="form-group">
+          {% render_field customereshop.mobile_no placeholder="Mobile No." class="form-control" %}
+        </div>
+        <div class ="form-group">
+          {% render_field customereshop.profile_pic placeholder="" class="form-control" %}
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-warning text-dark mb-3">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

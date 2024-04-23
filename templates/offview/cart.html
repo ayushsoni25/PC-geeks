@@ -1,0 +1,59 @@
+{% extends "offview/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row>"
+    <div class="col-md-3 mx-auto">
+      <table class="table table-striped text-center" id="hv-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Remove From Cart</th>
+          </tr>
+        </thead>
+          {% for myin in pd %}
+      {% if myin %}
+        <tbody>
+        <tr>
+          <td> {{myin.Name}}</td>
+          <td> <img src="{% static myin.product_pic.url %}" alt="{{myin.Name}}" height="60px" width="60px" /></td>
+          <td>{{myin.price}}</td>
+          <td>{{myin.description|slice:":100"}}</td>
+
+          <td><a class="btn btn-danger btn-xs" href={% url 'remove-from-cart' myin.id  %}><span>Remove Item</span></a></td>
+
+        </tr>
+
+        </tbody>
+        {%else%}
+        <br><br><br>
+        <h1>no products</h1>
+        {% endif %}
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <table class="table table-striped text-center" id="hv-table">
+        <thead>
+          <tr>
+            <th colspan=2>Bill</th>
+          </tr>
+            <tr>
+                <td>Amount</td>
+                <td>&#8377 {{total}}</td>
+            </tr>
+            <tr>
+                <td colspan=2><a class="btn btn-success btn-xs" href="/customer-purchase"><span>Purchase</span></a></td>
+            </tr>
+          </thead>
+    </div>
+  </div>
+</div>
+{% endblock %}
