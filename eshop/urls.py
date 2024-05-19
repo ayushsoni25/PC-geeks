@@ -14,6 +14,7 @@ urlpatterns = [
     path('customer_home/',views.customer_home_view,name='customer_home'),
     path('cart/<int:myinid>', views.add_cart,name='add-to-cart'),
     path('cart/', views.cart_view,name='cart'),
+    path('cart-guest/', views.cart_view_guest,name='cartguest'),
     path('remove-from-cart/<int:myinid>/', views.remove_from_cart_view,name='remove-from-cart'),
     path('customer-purchase/',views.customer_purchase_view,name="customer-purchase"),
     path('payment-success/',views.payment_success_view,name='payment-success'),

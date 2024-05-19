@@ -95,10 +95,7 @@ def add_cart(request,myinid):
         response.set_cookie('product_ids', product_ids)
     else:
         response.set_cookie('product_ids', myinid)
-
     product=models.Product.objects.get(id=myinid)
-
-
     return response
 
 
@@ -124,6 +121,30 @@ def cart_view(request):
             for myin in product:
                 total=(int(myin.price)+total)
     return render(request,'offview/cart.html',{'pd':product,'total':total,'product_count_in_cart':product_count_in_cart})
+
+
+def cart_view_guest(request):
+    #for cart counter
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        counter=product_ids.split('|')
+        product_count_in_cart=len(set(counter))
+    else:
+        product_count_in_cart=0
+
+    # fetching product details from db whose id is present in cookie
+    product=None
+    total=0
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        if product_ids != "":
+            product_id_in_cart=product_ids.split('|')
+            product=models.Product.objects.all().filter(id__in = product_id_in_cart)
+
+            #for total price shown in cart
+            for myin in product:
+                total=(int(myin.price)+total)
+    return render(request,'offview/cartguest.html',{'pd':product,'total':total,'product_count_in_cart':product_count_in_cart})
 
 
 def remove_from_cart_view(request,myinid):
@@ -231,7 +252,7 @@ def payment_success_view(request):
         mobile=request.COOKIES['mobile']
     if 'address' in request.COOKIES:
         address=request.COOKIES['address']
-
+    # print(products)
     # here we are placing number of orders as much there is a products
     # suppose if we have 5 items in cart and we place order....so 5 rows will be created in orders table
     # there will be lot of redundant data in orders table...but its become more complicated if we normalize it
@@ -266,15 +287,6 @@ def send_feedback_view(request):
             return render(request, 'offview/Feedback_sent.html')
     return render(request, 'offview/send_feedback.html', {'feedbackForm':feedbackForm})
 
-
-def send_feedback_view_guest(request):
-        feedbackForm=forms.FeedBackForm()
-        if request.method == 'POST':
-            feedbackForm = forms.FeedBackForm(request.POST)
-            if feedbackForm.is_valid():
-                feedbackForm.save()
-                return render(request, 'offview/Feedback_sent.html')
-        return render(request, 'offview/send_feedbackguest.html', {'feedbackForm':feedbackForm})
 
 
 def send_feedback_view_guest(request):
