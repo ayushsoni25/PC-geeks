@@ -1,0 +1,30 @@
+{% extends "offview/base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+   <div class="row">
+       <div class="col-md-6 mx-auto mt-5 bg-warning text-dark">
+         <form method="POST">
+           {% csrf_token %}
+         <div class="form-group">
+           <h4>Name</h4>
+       {% render_field feedbackForm.name class="form-control" placeholder="Name" %}
+         </div>
+         <div class="form-group">
+           <h4>Feedback </h4>
+       {% render_field feedbackForm.feedback class="form-control" placeholder="Feedback" %}
+         </div>
+         <div class="form-group">
+           <h4>E-Mail </h4>
+       {% render_field feedbackForm.email class="form-control" placeholder="E-Mail" %}
+         </div>
+
+
+         <div class="text-center ">
+           <input type="submit" value="Submit FeedBack" class="btn btn-dark mb-3" />
+         </div>
+       </form>
+       </div>
+     </div>
+</div>
+{% endblock %}

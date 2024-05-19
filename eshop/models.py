@@ -13,7 +13,7 @@ class Customer(models.Model):
     def thumbnail_preview(self):
         if self.profile_pic:
             return mark_safe('<img src="/static{}" width="100" height=100 />'.format(self.profile_pic.url) )
-            return ""
+        return ""
 
 class Product(models.Model):
     Name=models.CharField(max_length=2000)
@@ -26,7 +26,7 @@ class Product(models.Model):
     def thumbnail_preview(self):
         if self.product_pic:
             return mark_safe('<img src="/static{}" width="100" height=100 />'.format(self.product_pic.url) )
-            return ""
+        return ""
 
 class Order(models.Model):
     STATUS=(
@@ -43,12 +43,12 @@ class Order(models.Model):
     order_date=models.DateTimeField(auto_now_add=True,null=True)
     status=models.CharField(max_length=50,null=True,choices=STATUS)
     def __str__(self):
-        return self
+        return ""
     @property
     def thumbnail_preview(self):
         if self.profile_pic:
             return mark_safe('<img src="/static{}" width="100" height=100 />'.format(self.profile_pic.url) )
-            return ""
+        # return ""
 class FeedBack(models.Model):
     name=models.CharField(max_length=20)
     feedback=models.CharField(max_length=500)
@@ -60,4 +60,4 @@ class FeedBack(models.Model):
     def thumbnail_preview(self):
         if self.profile_pic:
             return mark_safe('<img src="/static{}" width="100" height=100 />'.format(self.profile_pic.url) )
-            return ""
+        return ""
